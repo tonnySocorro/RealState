@@ -25,23 +25,39 @@ const [newAuthorizedAddress, setNewAuthorizedAddress] = useState('');
         await getBlockchain();
     }
     let onSubmitAddAuthorizedAddress = async (e) => {
+      try {
         e.preventDefault();
         const tx = await realStateCities.current.addAuthorizedAddress(newAuthorizedAddress);
         await tx.wait();
         // Actualizar la lista de direcciones autorizadas
         updateAuthorizedAddresses();
+      } catch (error) {
+        console.error("Error adding authorized address:", error.message);
+        alert("Error adding authorized address");
+      }
       };
     
       let onSubmitRemoveAuthorizedAddress = async (addressToRemove) => {
+        try {
         const tx = await realStateCities.current.removeAuthorizedAddress(addressToRemove);
         await tx.wait();
         // Actualizar la lista de direcciones autorizadas
         updateAuthorizedAddresses();
+      } catch (error) {
+        console.error("Error removing authorized address:", error.message);
+        alert("Error removing authorized address")
+      }
       };
       let updateAuthorizedAddresses = async () => {
+        try {
         // Obtener la lista actualizada de direcciones autorizadas y actualizar el estado
         const addresses = await realStateCities.current.getAuthorizedAddresses();
         setAuthorizedAddresses(addresses);
+      } catch (error) {
+        console.error("Error updating authorized addresses:", error.message);
+        alert("Error updating authorized addresses")
+      }
+        
       };
 
     let getBlockchain = async () => {
@@ -72,7 +88,7 @@ const [newAuthorizedAddress, setNewAuthorizedAddress] = useState('');
         return null;
     }
     let onSubmitAddRealState = async (e) => {
-        
+      try {
       e.preventDefault();
          // this function use gas
     const tx = await realStateCities.current.addRealState({
@@ -87,10 +103,15 @@ const [newAuthorizedAddress, setNewAuthorizedAddress] = useState('');
   
 
       await tx.wait();
+    } catch (error) {
+      console.error("Error adding RealState:", error.message);
+      alert("Error adding RealState")
+    }
 
   }
   
   let onSubmitSearchRealState = async (e) => {
+    try {
     e.preventDefault();
 
     let city = e.target.elements[0].value;
@@ -98,13 +119,21 @@ const [newAuthorizedAddress, setNewAuthorizedAddress] = useState('');
     let newProperties = await realStateCities.current.getRealStateByCity(city);
     
     setRealStateArray(newProperties)
+  } catch (error) {
+    console.error("Error searching RealState:", error.message);
+    alert("Error searching RealState")
+  }
 }
 
 let clickOnDeleteRealState = async (registration) => {
-
+  try {
   const tx =  await realStateCities.current.deleteRealStateByRegistration(registration);
   await tx.wait();
   setRealStateArray([])
+} catch (error) {
+  console.error("Error deleting RealState:", error.message);
+  alert("Error deleting RealState")
+}
 }
 
 

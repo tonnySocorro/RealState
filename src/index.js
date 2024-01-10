@@ -44,7 +44,7 @@ const [newAuthorizedAddress, setNewAuthorizedAddress] = useState('');
         // Actualizar la lista de direcciones autorizadas
         updateAuthorizedAddresses();
       } catch (error) {
-        console.error("Error removing authorized address:", error.message);
+        console.error("Error removing authorized address:", error);
         alert("Error removing authorized address")
       }
       };
@@ -54,7 +54,7 @@ const [newAuthorizedAddress, setNewAuthorizedAddress] = useState('');
         const addresses = await realStateCities.current.getAuthorizedAddresses();
         setAuthorizedAddresses(addresses);
       } catch (error) {
-        console.error("Error updating authorized addresses:", error.message);
+        console.error("Error updating authorized addresses:", error);
         alert("Error updating authorized addresses")
       }
         
@@ -104,7 +104,7 @@ const [newAuthorizedAddress, setNewAuthorizedAddress] = useState('');
 
       await tx.wait();
     } catch (error) {
-      console.error("Error adding RealState:", error.message);
+      console.error("Error adding RealState:", error);
       alert("Error adding RealState")
     }
 
@@ -120,7 +120,7 @@ const [newAuthorizedAddress, setNewAuthorizedAddress] = useState('');
     
     setRealStateArray(newProperties)
   } catch (error) {
-    console.error("Error searching RealState:", error.message);
+    console.error("Error searching RealState:", error);
     alert("Error searching RealState")
   }
 }
@@ -131,7 +131,7 @@ let clickOnDeleteRealState = async (registration) => {
   await tx.wait();
   setRealStateArray([])
 } catch (error) {
-  console.error("Error deleting RealState:", error.message);
+  console.error("Error deleting RealState:", error);
   alert("Error deleting RealState")
 }
 }

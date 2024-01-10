@@ -32,7 +32,7 @@ const [newAuthorizedAddress, setNewAuthorizedAddress] = useState('');
         // Actualizar la lista de direcciones autorizadas
         updateAuthorizedAddresses();
       } catch (error) {
-        console.error("Error adding authorized address:", error.message);
+        console.error("Error adding authorized address:", error);
         alert("Error adding authorized address");
       }
       };
